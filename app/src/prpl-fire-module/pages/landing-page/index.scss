@@ -16,6 +16,7 @@
 .banner {
   @include display-flex;
   @include flex-direction(row);
+  @include flex-align-center;
   padding: 10px;
 }
 
@@ -52,6 +53,16 @@
   border: 1px solid black;
   text-decoration: none;
   color: inherit;
+
+  &.priority {
+    color: white;
+    background: black;
+    border-color: white;
+  }
+
+  &.priority:hover {
+    background: #666;
+  }
 }
 
 
