@@ -1,9 +1,9 @@
-@mixin layout {
+@mixin display-flex {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
 };
-@mixin layout-inline {
+@mixin display-inline-flex {
   display: -ms-inline-flexbox;
   display: -webkit-inline-flex;
   display: inline-flex;
