@@ -45,9 +45,6 @@ class Component extends Element {
     image.onload = () => {
       this.appendChild(image);
       thumbnailImage.classList.add('hidden');
-      setTimeout(() => {
-        this.removeChild(thumbnailImage);
-      }, 1000);
     };
   }
 }
