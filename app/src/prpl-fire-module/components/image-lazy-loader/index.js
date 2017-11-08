@@ -2,21 +2,6 @@ import { Element } from '@polymer/polymer/polymer-element';
 import { customElements } from 'global/window';
 import './index.html';
 
-const getTransitionEvent = (el) => {
-  const transitions = {
-    'transition': 'transitionend',
-    'OTransition': 'oTransitionEnd',
-    'MozTransition': 'Transitionend',
-    'WebkitTransition': 'webkitTransitionEnd'
-  };
-
-  for (var t in transitions) {
-    if (el.style[t] !== undefined) {
-      return transitions[t];
-    }
-  }
-};
-
 class Component extends Element {
   static get is () { return 'image-lazy-loader'; }
 
@@ -34,32 +19,8 @@ class Component extends Element {
     const image = document.createElement('img');
     image.src = img;
     image.onload = () => {
-      const height = thumbnailImage.getBoundingClientRect().height || image.getBoundingClientRect().height;
-      image.style.marginTop = parseInt(((height + 3.5) * -1), 10) + 'px';
-      image.style.position = 'absolute';
-      image.classList.add('new');
-      const transition = getTransitionEvent(image);
       this.appendChild(image);
-      setTimeout(() => {
-        image.classList.remove('new');
-      });
-
-      if (transition) {
-        this._timeOut = setTimeout(() => {
-          image.style.marginTop = null;
-          image.style.position = null;
-          this.removeChild(thumbnailImage);
-          image.removeEventListener(transition, fn);
-        }, 1050);
-        const fn = () => {
-          image.style.marginTop = null;
-          image.style.position = null;
-          this.removeChild(thumbnailImage);
-          image.removeEventListener(transition, fn);
-          clearTimeout(this._timeOut);
-        };
-        image.addEventListener(transition, fn);
-      }
+      thumbnailImage.classList.add('hidden');
     };
   }
 }
